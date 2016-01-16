@@ -48,7 +48,7 @@ java -jar JavaDocSourceEmbed-1.0-SNAPSHOT.jar pathToSrcDir/src build/tempJavaSou
 javadoc -protected -d dist/javadoc -windowtitle "Codename One API" build/tempJavaSources
 ```
 
-IMPORTANT: notice that we use a temporary directory to generate the source and don't generate to the original directory. The reason for that is simple. If you change the gist or add additional gists in the future youd want them to be updated.
+> **Important**: notice that we use a temporary directory to generate the source and don't generate to the original directory. The reason for that is simple. If you change the gist or add additional gists in the future youd want them to be updated.
 
 Or using ant you can do something like:
 
