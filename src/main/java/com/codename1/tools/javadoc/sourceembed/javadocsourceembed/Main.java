@@ -52,6 +52,8 @@ import org.json.JSONObject;
  * @author Shai Almog
  */
 public class Main {
+    private static final String CLIENT_ID = "";
+    private static final String CLIENT_SECRET = "";
     private static Charset CHARSET;
     private static final HashMap<String, String> gistCache = new HashMap<>();
     public static void main(String[] args) throws Exception {
@@ -100,7 +102,7 @@ public class Main {
                     continue;
                 }
                 
-                URL u = new URL("https://api.github.com/gists/" + id);
+                URL u = new URL("https://api.github.com/gists/" + id + "?client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET);
                 try(BufferedReader br = new BufferedReader(new InputStreamReader(u.openStream(), CHARSET))) {
                     String jsonText = br.lines().collect(Collectors.joining("\n"));
                     JSONObject json = new JSONObject(jsonText);
