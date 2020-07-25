@@ -23,9 +23,14 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
 
-
-    - name: Upload Result
-      uses: actions/upload-artifact@v2
+    - name: Release Upload
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
       with:
-        name: JavaDocSourceEmbed.jar
-        path: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        body: |
+          Auto-generated CI release
+          draft: false
+          prerelease: false
