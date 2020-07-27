@@ -23,12 +23,12 @@ jobs:
     - name: Build with Maven
       run: mvn dependency:copy-dependencies package --file pom.xml
 
-    - name: Upload to ART
-      uses: cross-the-world/scp-pipeline@master
+    - name: Upload a Release Asset
+      uses: actions/upload-release-asset@v1.0.2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        host: ${{ secrets.ART_IP }}
-        user: ${{ secrets.ART_USER }}
-        pass: ${{ secrets.ART_AUTH }}
-        port: 22
-        local: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
-        remote: ${{ secrets.ART_DIR }}
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
+        asset_name: JavaDocSourceEmbed.jar
+        asset_content_type: application/java-archive
