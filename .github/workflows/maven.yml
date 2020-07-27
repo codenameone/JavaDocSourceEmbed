@@ -35,13 +35,13 @@ jobs:
           draft: false
           prerelease: false
 
-    - name: Upload a Release Asset
-      uses: actions/upload-release-asset@v1.0.2
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload to ART
+      uses: appleboy/scp-action@master
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
-        asset_name: JavaDocSourceEmbed.jar
-        asset_content_type: application/java-archive
-     
+        host: ${{ secrets.ART_IP }}
+        username: ${{ secrets.ART_USER }}
+        password: ${{ secrets.ART_AUTH }}
+        port: 22
+        source: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
+        target: ${{ secrets.ART_DIR }}
+        strip_components: 1
