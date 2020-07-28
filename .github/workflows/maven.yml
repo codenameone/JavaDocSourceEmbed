@@ -24,8 +24,12 @@ jobs:
       run: mvn dependency:copy-dependencies package --file pom.xml
 
 
-    - name: Upload Result
-      uses: actions/upload-artifact@v2
+    - name: Upload to ART
+      uses: horochx/deploy-via-scp@v1.0.1
       with:
-        name: JavaDocSourceEmbed.jar
-        path: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
+        host: ${{ secrets.ART_IP }}
+        user: ${{ secrets.ART_USER }}
+        pass: ${{ secrets.ART_AUTH }}
+        port: 22
+        local: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
+        remote: ${{ secrets.ART_DIR }}
