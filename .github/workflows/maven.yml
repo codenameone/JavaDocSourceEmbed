@@ -25,11 +25,11 @@ jobs:
 
 
     - name: Upload to ART
-      uses: horochx/deploy-via-scp@v1.0.1
+      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
       with:
         host: ${{ secrets.ART_IP }}
         user: ${{ secrets.ART_USER }}
         pass: ${{ secrets.ART_AUTH }}
         port: 22
-        local: target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
-        remote: ${{ secrets.ART_DIR }}
+        first_ssh: rm ${{ secrets.ART_DIR }}JavaDocSourceEmbed-1.0-SNAPSHOT.jar
+        scp: ./target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar => ${{ secrets.ART_DIR }}
