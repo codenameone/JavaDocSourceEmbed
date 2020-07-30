@@ -23,6 +23,7 @@ jobs:
     - name: Build with Maven
       run: | 
         mvn dependency:copy-dependencies package --file pom.xml
+        unzip -v target/JavaDocSourceEmbed-1.0-SNAPSHOT.jar
         ls target
 
 
