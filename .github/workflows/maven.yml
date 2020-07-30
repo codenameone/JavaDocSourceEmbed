@@ -21,7 +21,9 @@ jobs:
       with:
         java-version: 1.8
     - name: Build with Maven
-      run: mvn dependency:copy-dependencies package --file pom.xml
+      run: | 
+        mvn dependency:copy-dependencies package --file pom.xml
+        ls target
 
 
     - name: Upload to ART
